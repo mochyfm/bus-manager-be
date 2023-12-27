@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { UserType } from './userType';
 
 @Entity()
 export class User {
@@ -6,8 +13,28 @@ export class User {
   id: number;
 
   @Column()
-  username: string;
+  firstName: string;
+
+  @Column()
+  secondName: string;
+
+  @Column()
+  email: string;
+
+  @Column()
+  age: number;
+
+  @Column()
+  isMinor: boolean;
 
   @Column()
   password: string;
+
+  @ManyToOne(() => UserType, { eager: true })
+  @JoinColumn()
+  typeOfUser: UserType;
+
+  constructor() {
+    this.isMinor = this.age <= 17;
+  }
 }
