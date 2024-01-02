@@ -1,6 +1,23 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { DockerService } from './config/postgres.config';
+import * as dotenv from 'dotenv';
+import * as fs from 'fs';
+import * as crypto from 'crypto';
+import { CONSTANTS } from './constants/constants.config';
+
+const generateSecretKey = () => crypto.randomBytes(32).toString('hex');
+
+if (
+  !fs.existsSync(CONSTANTS.envFilePath) ||
+  !fs.readFileSync(CONSTANTS.envFilePath, 'utf-8').includes('JWT_SECRET')
+) {
+  const secretKey = generateSecretKey();
+  fs.writeFileSync(CONSTANTS.envFilePath, `JWT_SECRET=${secretKey}\n`);
+  console.log('Secret key generated and saved in the .env file.');
+}
+
+dotenv.config();
 
 // Function to bootstrap the NestJS application
 async function bootstrap() {

@@ -17,9 +17,15 @@ dependencies:
   '@nestjs/typeorm':
     specifier: ^10.0.1
     version: 10.0.1(@nestjs/common@10.2.10)(@nestjs/core@10.2.10)(reflect-metadata@0.1.13)(rxjs@7.8.1)(typeorm@0.3.17)
+  crypto:
+    specifier: ^1.0.1
+    version: 1.0.1
   dockerode:
     specifier: ^4.0.0
     version: 4.0.0
+  dotenv:
+    specifier: ^16.3.1
+    version: 16.3.1
   jsonwebtoken:
     specifier: ^9.0.2
     version: 9.0.2
@@ -2603,6 +2609,11 @@ packages:
       shebang-command: 2.0.0
       which: 2.0.2
     dev: true
+
+  /crypto@1.0.1:
+    resolution: {integrity: sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==}
+    deprecated: This package is no longer supported. It's now a built-in Node module. If you've depended on crypto, you should switch to the one that's built-in.
+    dev: false
 
   /date-fns@2.30.0:
     resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
