@@ -5,6 +5,8 @@ import { UsersService } from './services/users.service';
 import { UserController } from './controller/user.controller';
 import { UserType } from './entities/userType';
 import { AuthService } from './services/auth.service';
+import { TerminusModule } from '@nestjs/terminus';
+import { StatusCheckController } from './controller/status.controller';
 
 @Module({
   imports: [
@@ -19,8 +21,9 @@ import { AuthService } from './services/auth.service';
       synchronize: true,
     }),
     TypeOrmModule.forFeature([User, UserType]),
+    TerminusModule,
   ],
-  controllers: [UserController],
+  controllers: [UserController, StatusCheckController],
   providers: [UsersService, AuthService],
 })
 export class AppModule {}
