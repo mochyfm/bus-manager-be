@@ -10,31 +10,36 @@ import { UserType } from './userType';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
-  @Column()
-  firstName: string;
+  @Column({ nullable: true })
+  firstName?: string;
 
-  @Column()
-  secondName: string;
+  @Column({ nullable: true })
+  secondName?: string;
 
-  @Column()
+  @Column({ nullable: true })
+  age?: number;
+
+  @Column({ nullable: true })
+  isMinor?: boolean;
+
+  @Column({ unique: true })
   email: string;
-
-  @Column()
-  age: number;
-
-  @Column()
-  isMinor: boolean;
 
   @Column()
   password: string;
 
-  @ManyToOne(() => UserType, { eager: true })
+  @ManyToOne(() => UserType, { eager: true, nullable: true })
   @JoinColumn()
-  typeOfUser: UserType;
+  typeOfUser?: UserType;
 
-  constructor() {
-    this.isMinor = this.age <= 17;
+  @Column({ nullable: true })
+  accessToken?: string;
+
+  constructor(email?: string, password?: string) {
+    this.email = email || '';
+    this.password = password || '';
+    this.isMinor = this.age ? this.age <= 17 : false;
   }
 }
