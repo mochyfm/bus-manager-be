@@ -8,6 +8,7 @@ import * as bcrypt from 'bcrypt';
 import { User } from '../entities/user';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CONSTANTS } from '../../constants/constants.config';
 
 @Injectable()
 export class AuthService {
@@ -62,7 +63,7 @@ export class AuthService {
 
   private generateToken(user: any): string {
     const payload = { username: user.username, sub: user.userId };
-    const options = { expiresIn: '1h' }; // Puedes ajustar el tiempo de expiración según sea necesario
+    const options = { expiresIn: CONSTANTS.expirationTokens }; // Puedes ajustar el tiempo de expiración según sea necesario
     const secretKey = process.env.JWT_SECRET; // Reemplaza con tu clave secreta
 
     return jwt.sign(payload, secretKey, options);

@@ -1,31 +1,14 @@
-import { Controller, Get, Post, Body, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Delete, Param } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { User } from '../entities/user';
-import { AuthService } from '../services/auth.service';
-import { LoginParams } from '../../types/AuthTypes';
 
 @Controller('users')
 export class UserController {
-  constructor(
-    private readonly userService: UsersService,
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly userService: UsersService) {}
 
   @Get()
   async findAll(): Promise<User[]> {
     return this.userService.findAll();
-  }
-
-  @Post('/signup')
-  async signUp(@Body() { email, password }: LoginParams): Promise<User> {
-    const user = await this.authService.signUp(email, password);
-    return user;
-  }
-
-  @Post('/signin')
-  async signIn(@Body() { email, password }: LoginParams): Promise<User> {
-    const user = await this.authService.signIn(email, password);
-    return user;
   }
 
   @Delete(':id')

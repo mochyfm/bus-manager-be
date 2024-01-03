@@ -107,7 +107,7 @@ export class DockerService {
       await container.stop();
       logger.log(`PostgreSQL container stopped`);
     } catch (dockerError) {
-      logger.error('Error stopping the PostgreSQL container:', dockerError);
+      logger.error(dockerError);
     }
   }
 
