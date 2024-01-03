@@ -5,7 +5,6 @@ import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as crypto from 'crypto';
 import { CONSTANTS } from './constants/constants.config';
-import { StatusCheckService } from './config/StatusCheckService';
 import { Logger } from '@nestjs/common';
 
 const generateSecretKey = () => crypto.randomBytes(32).toString('hex');
@@ -25,7 +24,7 @@ async function bootstrap() {
   const logger = new Logger('Bootstrap');
   const dockerService = new DockerService();
 
-  const statusCheckService = new StatusCheckService(dockerService);
+  // const statusCheckService = new StatusCheckService(dockerService);
   dockerService.startPostgresContainer();
 
   // Handle the SIGINT signal to stop the Docker container before exiting
@@ -46,9 +45,9 @@ async function bootstrap() {
       } seconds before connecting to the database...`,
     );
 
-    setInterval(async () => {
-      await statusCheckService.checkStatus();
-    }, CONSTANTS.statusCheckServiceIntervalTimeInterval);
+    // setInterval(async () => {
+    //   await statusCheckService.checkStatus();
+    // }, CONSTANTS.statusCheckServiceIntervalTimeInterval);
 
     await new Promise((resolve) =>
       setTimeout(resolve, CONSTANTS.waitForResponseDockerTimeout),

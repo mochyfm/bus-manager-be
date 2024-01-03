@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, OnModuleInit } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user';
 import { UsersService } from './services/users.service';
@@ -7,6 +7,7 @@ import { UserType } from './entities/userType';
 import { AuthService } from './services/auth.service';
 import { TerminusModule } from '@nestjs/terminus';
 import { StatusCheckController } from './controller/status.controller';
+import { InnitDatabase } from '../config/database/innitDatabase';
 
 @Module({
   imports: [
@@ -24,6 +25,12 @@ import { StatusCheckController } from './controller/status.controller';
     TerminusModule,
   ],
   controllers: [UserController, StatusCheckController],
-  providers: [UsersService, AuthService],
+  providers: [UsersService, AuthService, InnitDatabase],
 })
-export class AppModule {}
+export class AppModule implements OnModuleInit {
+  constructor(private readonly innitDatabase: InnitDatabase) {}
+
+  async onModuleInit() {
+    await this.innitDatabase.createData();
+  }
+}
