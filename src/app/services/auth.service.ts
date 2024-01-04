@@ -63,8 +63,8 @@ export class AuthService {
 
   private generateToken(user: any): string {
     const payload = { username: user.username, sub: user.userId };
-    const options = { expiresIn: CONSTANTS.expirationTokens }; // Puedes ajustar el tiempo de expiración según sea necesario
-    const secretKey = process.env.JWT_SECRET; // Reemplaza con tu clave secreta
+    const options = { expiresIn: CONSTANTS.expirationTokens };
+    const secretKey = process.env.JWT_SECRET;
 
     return jwt.sign(payload, secretKey, options);
   }
