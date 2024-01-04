@@ -1,11 +1,12 @@
 import Dockerode = require('dockerode');
-
+import { Logger } from '@nestjs/common';
 import {
   ContainerProperties,
   DataBaseConnectionConfig,
 } from '../constants/docker.config';
 
 const docker = new Dockerode();
+const logger = new Logger('DockerService');
 
 const dockerConfig: Dockerode.ContainerCreateOptions = {
   Image: ContainerProperties.image,
@@ -30,20 +31,21 @@ export class DockerService {
 
   async startPostgresContainer() {
     try {
+      logger.log('Checking docker container state...');
       // Check if the container already exists
       const existingContainer = docker.getContainer(ContainerProperties.name);
       const containerInfo = await existingContainer.inspect();
 
       // If the container exists and is running, log a message and return
       if (containerInfo.State.Running) {
-        console.log(
+        logger.log(
           `PostgreSQL container is already running on port ${ContainerProperties.port}`,
         );
         return;
       }
 
       // If the container exists but is not running, start it
-      console.log(
+      logger.log(
         `Container ${ContainerProperties.name} does already exist. Starting...`,
       );
 
@@ -53,7 +55,7 @@ export class DockerService {
 
         // Start the container if it's not already running
         await existingContainer.start();
-        console.log(
+        logger.log(
           `PostgreSQL container started on port ${ContainerProperties.port}`,
         );
 
@@ -62,20 +64,40 @@ export class DockerService {
     } catch (dockerError) {
       // If the container doesn't exist, create and start a new one
       if (dockerError.statusCode === 404) {
+        logger.log('Creating container');
         try {
           await (await docker.createContainer(dockerConfig)).start();
-          console.log(
+          logger.log(
             `PostgreSQL container started on port ${ContainerProperties.port}`,
           );
         } catch (startError) {
-          console.error('Error starting the PostgreSQL container:', startError);
+          logger.error('Error starting the PostgreSQL container:', startError);
         }
       } else {
-        console.error(
-          'Error checking the status of the PostgreSQL container:',
+        logger.error(
+          'Error checking the status of the PostgreSQL container: ',
           dockerError,
         );
       }
+    }
+  }
+
+  async restartPostgresContainer() {
+    try {
+      const container = docker.getContainer(ContainerProperties.name);
+      const containerInfo = await container.inspect();
+
+      if (!containerInfo.State.Running) {
+        // Re-Launch and check container status
+        await container.start();
+        logger.verbose('Container restarted. ');
+        const isRunning = await this.isPostgresContainerRunning();
+        return isRunning;
+      }
+      return true;
+    } catch (dockerError) {
+      logger.error('Error restarting the PostgreSQL container: ', dockerError);
+      return false;
     }
   }
 
@@ -83,22 +105,40 @@ export class DockerService {
     try {
       const container = docker.getContainer(ContainerProperties.name);
       await container.stop();
-      console.log('PostgreSQL container stopped');
+      logger.log(`PostgreSQL container stopped`);
     } catch (dockerError) {
-      console.error('Error stopping the PostgreSQL container:', dockerError);
+      logger.error(dockerError);
     }
   }
 
   async isPostgresContainerRunning() {
     try {
-      const containers = await docker.listContainers({ all: true });
-      const isRunning = containers.some((container) =>
-        container.Names.includes(`/${ContainerProperties.name}`),
+      const containers = await docker.listContainers();
+      const isRunning = containers.some(
+        (container) =>
+          container.Names.includes(`/${ContainerProperties.name}`) &&
+          container.State === 'running',
       );
-
       return isRunning;
     } catch (dockerError) {
-      console.error(
+      logger.error(
+        'Error checking the status of the PostgreSQL container:',
+        dockerError,
+      );
+      return false;
+    }
+  }
+
+  async doesPostgresContainerExist() {
+    try {
+      const container = docker.getContainer(ContainerProperties.name);
+      await container.inspect();
+      return true;
+    } catch (dockerError) {
+      if (dockerError.statusCode === 404) {
+        return false;
+      }
+      logger.error(
         'Error checking the status of the PostgreSQL container:',
         dockerError,
       );

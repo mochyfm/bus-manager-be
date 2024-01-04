@@ -1,73 +1,96 @@
+<h1 align="center">Bus Manager BE</h1>
+
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <img src="./docs/img/git_pic.png" alt="Bus Logo" width="200"/>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+<p align="center">
+  <img src="https://img.shields.io/badge/proyecto-Español-yellow.svg" alt="Proyecto: Español">
+  <img src="https://img.shields.io/badge/version-development-orange.svg" alt="Version">
+  <img src="https://img.shields.io/badge/framework-Nest.js-red.svg" alt="Framework: Nest.js">
+  <img src="https://img.shields.io/badge/package%20manager-pnpm-lightblue.svg" alt="Package Manager: pnpm">
+  <img src="https://img.shields.io/badge/language-TypeScript-blue.svg" alt="Language: TypeScript">
+  <img src="https://img.shields.io/badge/documentation-English-blue.svg" alt="Documentation: English">
+  <img src="https://img.shields.io/badge/compiler-SWC-green.svg" alt="Compiler: SWC">
+  <img src="https://img.shields.io/badge/docker-✔-blue.svg" alt="Docker">
+  <img src="https://img.shields.io/badge/SQL-postgreSQL-purple.svg" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License: MIT">
+  <img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build: Passing">
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+<br/>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Para acceder a la documentación en español, pulsa <a href='./docs/README-es.md'>aquí</a>.
 
-## Installation
+<hr/>
 
-```bash
-$ pnpm install
-```
 
-## Running the app
+# Description
 
-```bash
-# development
-$ pnpm run start
+This section focuses on the backend aspect of the vehicle management project (that currently doesn't have a name yet), particularly tailored for buses—both school and non-school varieties.
 
-# watch mode
-$ pnpm run start:dev
+#### Technology Stack
 
-# production mode
-$ pnpm run start:prod
-```
+- **Docker**: The backend utilizes Docker for containerization.
+- **PostgreSQL**: A PostgreSQL database is integrated into the Docker setup.
 
-## Test
+#### Prerequisites
 
-```bash
-# unit tests
-$ pnpm run test
+To get started, ensure the following prerequisites are met:
 
-# e2e tests
-$ pnpm run test:e2e
+- Docker is installed on your system.
+- A PostgreSQL image is available for development purposes.
 
-# test coverage
-$ pnpm run test:cov
-```
+*Note: Production-specific requirements are yet to be specified.*
 
-## Support
+#### Docker Handling
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Upon application startup:
 
-## Stay in touch
+1. The backend dynamically creates a Docker container if none exists.
+2. If a container is already present, the backend launches it directly.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+#### Data Management
 
-## License
+- **ORM (TypeORM)**: Object-Relational Mapping is facilitated through TypeORM for seamless data handling.
 
-Nest is [MIT licensed](LICENSE).
+#### Security Measures
+
+- **JWT (JSON Web Tokens)**: Authentication is implemented using JWT.
+- **Encryption**: Appropriate encryption measures are in place to ensure data security.
+
+## Development Setup
+
+Follow these steps for setting up the development environment:
+
+1. **Install Docker and have a PostgreSQL image available.**
+   - Ensure Docker is installed on your system.
+   - Have a PostgreSQL image ready for use.
+
+2. **Node.js Version Requirement**
+   - Ensure you have Node.js version 18 or higher installed.
+
+3. **Clone the Project and Install Dependencies**
+   - Clone the project repository.
+   - Navigate to the project directory and run the following command:
+
+     ```bash
+     pnpm install
+     ```
+
+4. **Start the Project in Development Mode**
+   - To run the project in development mode, use the following command:
+
+     ```bash
+     pnpm run start:dev
+     ```
+
+5. **Build the Project**
+   - To build the project, execute the following command:
+
+     ```bash
+     pnpm run build
+     ```
+
+These steps will set up your development environment and allow you to run the project in development mode or build it as needed.
+
