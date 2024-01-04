@@ -5,33 +5,17 @@
 </p>
 
 <p align="center">
-  <a href="#">
-    <img src="https://img.shields.io/badge/version-development-orange.svg" alt="Version">
-  </a>
-  <a href="#">
-    <img src="https://img.shields.io/badge/framework-Nest.js-red.svg" alt="Framework: Nest.js">
-  </a>
-  <a href="#">
-    <img src="https://img.shields.io/badge/language-TypeScript-blue.svg" alt="Language: TypeScript">
-  </a>
-  <a href="#">
-    <img src="https://img.shields.io/badge/package%20manager-pnpm-blue.svg" alt="Package Manager: pnpm">
-  </a>
-  <a href="#">
-    <img src="https://img.shields.io/badge/documentation-English-blue.svg" alt="Documentation: English">
-  </a>
-  <a href="#">
-    <img src="https://img.shields.io/badge/compiler-SWC-green.svg" alt="Compiler: SWC">
-  </a>
-  <a href="#">
-    <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License: MIT">
-  </a>
-  <a href="#">
-    <img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build: Passing">
-  </a>
-  <a href="#">
-    <img src="https://img.shields.io/badge/proyecto-Español-yellow.svg" alt="Proyecto: Español">
-  </a>
+  <img src="https://img.shields.io/badge/proyecto-Español-yellow.svg" alt="Proyecto: Español">
+  <img src="https://img.shields.io/badge/version-development-orange.svg" alt="Version">
+  <img src="https://img.shields.io/badge/framework-Nest.js-red.svg" alt="Framework: Nest.js">
+  <img src="https://img.shields.io/badge/package%20manager-pnpm-lightblue.svg" alt="Package Manager: pnpm">
+  <img src="https://img.shields.io/badge/language-TypeScript-blue.svg" alt="Language: TypeScript">
+  <img src="https://img.shields.io/badge/documentation-English-blue.svg" alt="Documentation: English">
+  <img src="https://img.shields.io/badge/compiler-SWC-green.svg" alt="Compiler: SWC">
+  <img src="https://img.shields.io/badge/docker-✔-blue.svg" alt="Docker">
+  <img src="https://img.shields.io/badge/SQL-postgreSQL-purple.svg" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License: MIT">
+  <img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build: Passing">
 </p>
 
 <br/>
